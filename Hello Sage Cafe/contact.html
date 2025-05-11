@@ -10,167 +10,159 @@
     <link rel="stylesheet" href="style.css">
     <style>
         .contact-section {
-            padding: 60px 20px;
+            padding: 30px 20px;
             max-width: 1200px;
             margin: 0 auto;
         }
 
         .contact-section h2 {
-            color: #838216;
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            font-size: 2.5em;
-            margin-bottom: 40px;
-            text-align: center;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            font-size: 2.2em;
+            margin-bottom: 25px;
         }
 
         .contact-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin-top: 40px;
+            gap: 25px;
+            margin-top: 25px;
         }
 
         .contact-info, .contact-form {
+            padding: 25px;
+        }
+
+        .contact-info h3, .contact-form h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .info-item {
+            margin-bottom: 12px;
+        }
+
+        .info-item i {
+            font-size: 1.2em;
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        .info-item p {
+            font-size: 0.95em;
+        }
+
+        .business-hours {
+            margin-top: 15px;
+        }
+
+        .business-hours h4 {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        .hours-list li {
+            margin-bottom: 6px;
+            font-size: 0.95em;
+        }
+
+        .social-links {
+            margin-top: 15px;
+            gap: 12px;
+        }
+
+        .social-links a {
+            font-size: 1.4em;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-group label {
+            margin-bottom: 5px;
+            font-size: 0.95em;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 8px;
+            font-size: 0.9em;
+        }
+
+        .form-group textarea {
+            height: 100px;
+        }
+
+        .submit-button {
+            padding: 10px 20px;
+            font-size: 0.95em;
+        }
+
+        .map-section {
+            margin: 30px 0;
+        }
+
+        .map-container {
+            padding: 25px;
+        }
+
+        .map-container h3 {
+            font-size: 1.6em;
+            margin-bottom: 15px;
+        }
+
+        .map-wrapper {
+            padding-bottom: 45%;
+        }
+
+        /* Map Section Styles */
+        .map-section {
+            margin: 60px 0;
+            padding: 0 20px;
+        }
+
+        .map-container {
+            max-width: 1200px;
+            margin: 0 auto;
             background-color: white;
             padding: 40px;
             border-radius: 15px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        .contact-info h3, .contact-form h3 {
+        .map-container h3 {
             font-family: 'Playfair Display', serif;
-            font-size: 1.8em;
+            font-size: 2em;
             margin-bottom: 30px;
             color: #838216;
-        }
-
-        .info-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 25px;
-        }
-
-        .info-item i {
-            font-size: 1.5em;
-            margin-right: 15px;
-            width: 30px;
             text-align: center;
-            color: #838216;
         }
 
-        .info-item p {
-            margin: 0;
-            font-size: 1.1em;
-            line-height: 1.4;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 300;
-            color: #3f3f26;
-        }
-
-        .business-hours {
-            margin-top: 30px;
-        }
-
-        .business-hours h4 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.3em;
-            margin-bottom: 15px;
-            color: #838216;
-        }
-
-        .hours-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .hours-list li {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            font-size: 1.1em;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 300;
-            color: #3f3f26;
-        }
-
-        .social-links {
-            margin-top: 30px;
-            display: flex;
-            gap: 20px;
-        }
-
-        .social-links a {
-            color: #838216;
-            font-size: 1.8em;
-            transition: transform 0.3s ease, color 0.3s ease;
-        }
-
-        .social-links a:hover {
-            transform: translateY(-3px);
-            color: #FBA619;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #838216;
-            font-weight: 600;
-            font-size: 1.1em;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #838216;
+        .map-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
             border-radius: 8px;
-            font-size: 1em;
-            transition: border-color 0.3s ease;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 300;
-            color: #3f3f26;
         }
 
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #FBA619;
-        }
-
-        .form-group textarea {
-            height: 150px;
-            resize: vertical;
-        }
-
-        .submit-button {
-            background-color: #838216;
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 25px;
-            font-size: 1.1em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        .map-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .submit-button:hover {
-            background-color: #FBA619;
-            transform: translateY(-2px);
+            height: 100%;
+            border: none;
         }
 
         @media (max-width: 768px) {
             .contact-container {
                 grid-template-columns: 1fr;
+            }
+
+            .map-container {
+                padding: 20px;
+            }
+
+            .map-container h3 {
+                font-size: 1.6em;
             }
         }
     </style>
@@ -202,7 +194,7 @@
                 <h3>Visit Us</h3>
                 <div class="info-item">
                     <i class="fas fa-map-marker-alt"></i>
-                    <p>Extension 5, 2nd Flr, Brgy, Hollywood Terraces, Antipolo, 1870 Lalawigan ng Rizal</p>
+                    <p>Extension 5, 2nd Flr., Hollywood Terraces, KM 23, Sumulong Hi-Way, Antipolo, Philippines</p>
                 </div>
                 <div class="info-item">
                     <i class="fas fa-phone"></i>
@@ -251,6 +243,21 @@
                     
                     <button type="submit" class="submit-button">Send Message</button>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Map Section -->
+    <div class="map-section">
+        <div class="map-container">
+            <h3>Find Us</h3>
+            <div class="map-wrapper">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1597.365760231599!2d121.1508555113872!3d14.619134926221943!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397b8dc558b57b9%3A0xd76873823805844a!2sHollywood%20Terraces%2C%20Sumulong%20Hwy%2C%20Antipolo%2C%201870%20Rizal!5e0!3m2!1sen!2sph!4v1746687151852!5m2!1sen!2sph"
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
             </div>
         </div>
     </div>

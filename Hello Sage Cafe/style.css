@@ -149,22 +149,23 @@ body {
 }
 
 .rewards-section .content-half h2 {
-    font-size: 2.2em;
-    margin-bottom: 24px;
+    font-size: 2.8em;
+    margin-bottom: 30px;
     color: #FFD000;
     font-family: 'Playfair Display', serif;
     font-weight: 700;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
     line-height: 1.2;
 }
 
 .rewards-section .content-half p {
-    font-size: 1.2em;
-    margin-bottom: 32px;
-    max-width: 500px;
+    font-size: 1.4em;
+    margin-bottom: 35px;
+    max-width: 600px;
     line-height: 1.6;
     font-weight: 300;
     color: #FFD000;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .text-content {
@@ -172,30 +173,32 @@ body {
 }
 
 .text-content h2 {
-    font-size: 2.2em;
-    margin-bottom: 20px;
+    font-size: 3.2em;
+    margin-bottom: 25px;
     font-family: 'Playfair Display', serif;
     font-weight: 700;
     color: #FFD000;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
     line-height: 1.2;
 }
 
 .text-content p {
-    font-size: 1.2em;
+    font-size: 1.5em;
     line-height: 1.6;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
     font-weight: 300;
     color: #FFD000;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 /* Menu Section */
 .menu-section h2 {
-    color: #838216; /* Matcha Greenish Color */
+    color: #838216;
     font-family: 'Playfair Display', serif;
     font-weight: 700;
-    margin-bottom: 30px;
-    font-size: 3em; /* Increased from 2.5em */
+    margin-bottom: 35px;
+    font-size: 3.5em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .menu-items {
@@ -232,21 +235,24 @@ body {
 
 .item p {
     color: #838216;
-    margin-top: 15px;
-    font-size: 1.1em;
-    padding: 0 10px;
+    margin-top: 20px;
+    font-size: 1.3em;
+    padding: 0 15px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 /* Button Styles */
 .button {
     display: inline-block;
-    padding: 10px 20px;
+    padding: 12px 25px;
     background-color: white;
     color: #1e3932;
     text-decoration: none;
     border-radius: 25px;
     font-weight: 600;
+    font-size: 1.2em;
     transition: all 0.3s ease;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .button:hover {
@@ -334,6 +340,61 @@ body {
     width: 100%;
     height: 250px;
     overflow: hidden;
+    position: relative;
+}
+
+.menu-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    max-height: 90%;
+    background: rgba(51, 51, 51, 0.82);
+    color: #FFD000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    padding: 18px 10px 14px 10px;
+    text-align: center;
+    z-index: 2;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+.menu-image:hover .menu-overlay,
+.menu-item:focus-within .menu-overlay {
+    opacity: 1;
+}
+
+.menu-overlay h2 {
+    font-size: 1.1em;
+    margin: 0 0 8px 0;
+    color: #FFD000;
+    font-family: 'Playfair Display', serif;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+    word-break: break-word;
+}
+
+.menu-overlay .price, .menu-overlay .portion {
+    color: #fffbe6;
+    font-size: 1em;
+    margin-bottom: 4px;
+    font-weight: 600;
+    word-break: break-word;
+}
+
+.menu-overlay .description {
+    color: #fffbe6;
+    font-size: 0.95em;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    line-height: 1.4;
+    word-break: break-word;
 }
 
 .menu-image img {
@@ -341,9 +402,11 @@ body {
     height: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
+    display: block;
 }
 
-.menu-item:hover .menu-image img {
+.menu-item:hover .menu-image img,
+.menu-image:hover img {
     transform: scale(1.05);
 }
 
@@ -389,55 +452,168 @@ body {
 
 /* About Us Page Styles */
 .about-section {
-    padding: 80px 20px;
+    padding: 60px 20px;
     max-width: 1200px;
     margin: 0 auto;
     background-color: #FFDE61;
 }
 
 .about-content {
-    gap: 40px;
     margin-top: 40px;
 }
 
+.about-grid {
+    display: grid;
+    gap: 40px;
+}
+
 .about-text {
-    max-width: 800px;
+    max-width: 900px;
+    margin: 0 auto;
     text-align: left;
     color: #838216;
     line-height: 1.8;
 }
 
-.about-text p {
-    margin-bottom: 20px;
-    font-size: 1.1em;
-}
-
-.about-text h3 {
+.about-text h2 {
     color: #838216;
     font-family: 'Playfair Display', serif;
-    font-size: 1.8em;
-    margin: 30px 0 15px;
+    font-size: 2.2em;
+    margin: 40px 0 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.about-text ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 20px 0;
+.about-text p {
+    margin-bottom: 25px;
+    font-size: 1.2em;
+    line-height: 1.8;
 }
 
-.about-text ul li {
-    margin: 10px 0;
-    padding-left: 25px;
-    position: relative;
-    font-size: 1.1em;
+.about-image {
+    margin: 30px 0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
 }
 
-.about-text ul li:before {
-    content: "•";
+.about-image:hover {
+    transform: translateY(-5px);
+}
+
+.about-image img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.about-image:hover img {
+    transform: scale(1.05);
+}
+
+.founder-quote {
+    margin: 50px 0;
+    padding: 30px;
+    background-color: #838216;
+    border-radius: 12px;
     color: #FFD000;
-    position: absolute;
-    left: 0;
-    font-size: 1.5em;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.founder-quote p {
+    font-size: 1.4em;
+    font-style: italic;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.founder-signature {
+    font-size: 1.2em !important;
+    font-weight: 600;
+    margin-top: 20px !important;
+}
+
+/* About Hero Section */
+.about-hero {
+    position: relative;
+    min-height: 60vh;
+    background-image: linear-gradient(rgba(131, 130, 22, 0.7), rgba(131, 130, 22, 0.7)), url('Hello sage main.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 40px;
+    overflow: hidden;
+}
+
+.about-hero-content {
+    text-align: center;
+    color: #FFD000;
+    padding: 20px;
+    z-index: 2;
+}
+
+.about-hero-content h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 4.5rem;
+    font-weight: 700;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+    margin: 0;
+    animation: fadeInUp 1s ease-out;
+}
+
+.hero-subtitle {
+    font-size: 1.8em;
+    margin-top: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    animation: fadeInUp 1s ease-out 0.3s forwards;
+    opacity: 0;
+}
+
+/* Responsive adjustments for About page */
+@media (max-width: 768px) {
+    .about-section {
+        padding: 40px 15px;
+    }
+
+    .about-text h2 {
+        font-size: 1.8em;
+        margin: 30px 0 15px;
+    }
+
+    .about-text p {
+        font-size: 1.1em;
+    }
+
+    .about-image {
+        margin: 20px 0;
+    }
+
+    .about-image img {
+        height: 300px;
+    }
+
+    .founder-quote {
+        margin: 30px 0;
+        padding: 20px;
+    }
+
+    .founder-quote p {
+        font-size: 1.2em;
+    }
+
+    .about-hero-content h1 {
+        font-size: 3rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.4em;
+    }
 }
 
 /* Contact Page Styles */
@@ -542,50 +718,6 @@ body {
     box-shadow: 0 4px 12px rgba(97, 96, 21, 0.2);
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .contact-content {
-        grid-template-columns: 1fr;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        padding: 20px;
-    }
-
-    .menu-title h1 {
-        font-size: 3em;
-    }
-
-    .about-hero {
-        height: 40vh;
-    }
-    
-    .about-hero-content h1 {
-        font-size: 3rem;
-    }
-
-    .menu-grid {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 20px;
-        padding: 10px;
-    }
-
-    .menu-container {
-        padding: 20px 10px;
-    }
-
-    .menu-item h2 {
-        font-size: 1.3rem;
-        padding: 15px 15px 8px;
-    }
-
-    .menu-image {
-        height: 200px;
-    }
-
-    .menu-details {
-        padding: 12px 15px 15px;
-    }
-}
-
 /* Social Media Section Styles */
 .social-media-section {
     padding: 60px 20px;
@@ -670,42 +802,137 @@ body {
     transform: scale(1.1);
 }
 
-/* About Page Hero Section */
-.about-hero {
-    position: relative;
-    min-height: 60vh;
-    background-image: linear-gradient(rgba(200, 199, 140, 0.7), rgba(131, 130, 22, 0.7)), url('about-hero-bg.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 40px;
-    overflow: hidden;
+@media (max-width: 600px) {
+    .menu-image {
+        height: 180px;
+    }
+    .menu-overlay {
+        font-size: 0.92em;
+        padding: 8px 2px 6px 2px;
+        max-height: 95%;
+    }
+    .menu-overlay h2 {
+        font-size: 1em;
+    }
 }
 
-.about-hero::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(rgba(131, 130, 22, 0.3), rgba(131, 130, 22, 0.3));
-}
-
-.about-hero-content {
+.menu-hero {
     text-align: center;
-    color: #FFD000;
-    padding: 20px;
+    margin-top: 40px;
+    margin-bottom: 10px;
 }
 
-.about-hero-content h1 {
+.menu-hero h1 {
     font-family: 'Playfair Display', serif;
-    font-size: 4.5rem;
-    font-weight: 700;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    margin: 0;
-    animation: fadeInUp 1s ease-out;
+    font-size: 3.5em;
+    color: #838216;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.08);
+}
+
+.menu-hero-phrase {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5em;
+    color: #222;
+    margin-bottom: 0;
+    letter-spacing: 0.5px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.08);
+}
+
+@media (max-width: 600px) {
+    .menu-hero h1 {
+        font-size: 2.2em;
+    }
+    .menu-hero-phrase {
+        font-size: 1.1em;
+    }
+}
+
+.menu-slider-container {
+    max-width: 950px;
+    margin: 40px auto 0 auto;
+    padding: 0 10px;
+}
+.menu-swiper {
+    width: 100%;
+    border-radius: 18px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.10);
+    background: #fffbe6;
+}
+.menu-swiper .swiper-slide img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 18px;
+    display: block;
+}
+.swiper-pagination-bullet {
+    background: #838216;
+    opacity: 0.7;
+}
+.swiper-pagination-bullet-active {
+    background: #FFD000;
+    opacity: 1;
+}
+.swiper-button-next, .swiper-button-prev {
+    color: #838216;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.12));
+}
+@media (max-width: 600px) {
+    .menu-swiper .swiper-slide img {
+        height: 180px;
+    }
+    .menu-slider-container {
+        margin-top: 20px;
+    }
+}
+
+.featured-menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 40px;
+    max-width: 1200px;
+    margin: 40px auto 36px auto;
+    padding: 0 10px;
+}
+.menu-item.featured {
+    background: #fffbe6;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.10);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 340px;
+}
+.menu-item.featured .menu-image {
+    height: 320px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+.menu-item.featured .menu-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+@media (max-width: 900px) {
+    .featured-menu-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+    .menu-item.featured .menu-image {
+        height: 200px;
+    }
+}
+@media (max-width: 600px) {
+    .featured-menu-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        margin: 24px auto 18px auto;
+    }
+    .menu-item.featured .menu-image {
+        height: 140px;
+    }
 }
