@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - Hello Sage Cafe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="Images/Transparent.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <style>
+        .specialties-section {
+            padding: 60px 20px;
+            background-color: #f9f5f0;
+            text-align: center;
+        }
+
+        .specialties-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5em;
+            color: #8B4513;
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .specialties-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: #8B4513;
+        }
+
+        .specialties-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .specialty-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .specialty-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .specialty-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        .specialty-item h3 {
+            font-family: 'Playfair Display', serif;
+            color: #8B4513;
+            margin: 15px 0 10px;
+            font-size: 1.3em;
+        }
+
+        .specialty-item p {
+            color: #666;
+            font-size: 0.9em;
+            padding: 0 15px 15px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        @media (max-width: 900px) {
+            .specialties-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .specialties-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .specialties-title {
+                font-size: 2em;
+            }
+        }
+
+        .menu-section {
+            padding: 60px 20px;
+            text-align: center;
+            background-color: #f9f5f0;
+        }
+
+        .menu-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5em;
+            color: #8B4513;
+            margin-bottom: 40px;
+        }
+
+        .menu-items {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+
+        .item {
+            flex: 1;
+            min-width: 300px;
+            max-width: 350px;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .item:hover {
+            transform: translateY(-5px);
+        }
+
+        .item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .item p {
+            padding: 20px;
+            color: #666;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1em;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 900px) {
+            .menu-items {
+                gap: 20px;
+            }
+            
+            .item {
+                min-width: 250px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .menu-section h2 {
+                font-size: 2em;
+            }
+            
+            .item {
+                min-width: 100%;
+            }
+        }
+
+        .floating-cart {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            background-color: #FFDE61;
+            color: #838216;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .floating-cart:hover {
+            transform: scale(1.1);
+        }
+
+        .floating-cart i {
+            font-size: 24px;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #838216;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .floating-cart {
+                bottom: 80px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+            }
+
+            .floating-cart i {
+                font-size: 20px;
+            }
+
+            .cart-count {
+                width: 20px;
+                height: 20px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <div class="header">
+        <div class="logo-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="Images/logo.jpg" alt="Hello Sage Cafe Logo">
+                </a>
+            </div>
+            <h1>Hello Sage Cafe</h1>
+        </div>
+        <nav class="nav-buttons">
+            <a href="index.html">Home</a>
+            <a href="aboutUs.html">About Us</a>
+            <a href="contact.html">Contact</a>
+            <a href="gallery.html">Gallery</a>
+        </nav>
+    </div>
+
+    <!-- Menu Grid Container -->
+    <div class="menu-hero">
+        <h1>Our Menu</h1>
+        <p class="menu-hero-phrase">Crafted with passion, served with love.</p>
+    </div>
+
+    <!-- Image Slider Section -->
+    <div class="menu-slider-container">
+        <div class="swiper menu-swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="Images/slider_image1.jpg" alt="Menu Slide 1"></div>
+                <div class="swiper-slide"><img src="Images/slider_image2.jpg" alt="Menu Slide 2"></div>
+                <div class="swiper-slide"><img src="Images/slider_image3.jpg" alt="Menu Slide 3"></div>
+                <div class="swiper-slide"><img src="Images/slider_image4.jpg" alt="Menu Slide 4"></div>
+                <div class="swiper-slide"><img src="Images/slider_image5.jpeg" alt="Menu Slide 5"></div>
+                <div class="swiper-slide"><img src="Images/slider_image6.jpg" alt="Menu Slide 6"></div>
+                <div class="swiper-slide"><img src="Images/slider_image7.jpg" alt="Menu Slide 7"></div>
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+            <!-- Add Navigation -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+    </div>
+
+    <!-- Menu Categories -->
+    <div class="menu-categories">
+        <div class="menu-category">
+            <h2>Rice Meals</h2>
+            <div class="menu-item" onclick="openLightbox(this)">
+                <img src="Images/rice meals.jpg" alt="Rice Meals">
+            </div>
+        </div>
+
+        <div class="menu-category">
+            <h2>Coffee & Drinks</h2>
+            <div class="menu-item" onclick="openLightbox(this)">
+                <img src="Images/coffee.jpg" alt="Coffee">
+            </div>
+        </div>
+
+        <div class="menu-category">
+            <h2>Pasta & Snacks</h2>
+            <div class="menu-item" onclick="openLightbox(this)">
+                <img src="Images/pasta and snacks.jpg" alt="Pasta and Snacks">
+            </div>
+        </div>
+    </div>
+
+    <!-- Menu Button -->
+    <div class="menu-button-container">
+        <button class="menu-button" onclick="toggleMenuTab()">
+            <i class="fas fa-utensils"></i> View Menu & Order
+        </button>
+    </div>
+
+    <!-- Menu Tab -->
+    <div class="menu-tab" id="menuTab">
+        <div class="menu-tab-content">
+            <button class="close-menu" onclick="toggleMenuTab()">&times;</button>
+            <h2>Menu</h2>
+            
+            <!-- Category Selection -->
+            <select id="categorySelect" onchange="showCategory(this.value)">
+                <option value="">Select Category</option>
+                <option value="rice-meals">Rice Meals</option>
+                <option value="pasta-snacks">Pasta and Snacks</option>
+                <option value="beverages">Coffee and Beverages</option>
+            </select>
+
+            <!-- Menu Items Container -->
+            <div class="menu-items-container">
+                <!-- Rice Meals Section -->
+                <div class="menu-section" id="rice-meals">
+                    <select id="riceMealsSelect" onchange="addToCart(this.value)">
+                        <option value="">Select Rice Meal</option>
+                        <option value="Chicken Inasal,99">Chicken Inasal - ₱99</option>
+                        <option value="Mama Mercy's Adobo Flakes,99">Mama Mercy's Adobo Flakes - ₱99</option>
+                        <option value="Hungarian Sausage,99">Hungarian Sausage - ₱99</option>
+                        <option value="Lechon Kawali,175">Lechon Kawali - ₱175</option>
+                        <option value="Tocino,99">Tocino - ₱99</option>
+                        <option value="Longganisa,99">Longganisa - ₱99</option>
+                        <option value="Pork Steak,99">Pork Steak - ₱99</option>
+                        <option value="Liempork Fection!,111">Liempork Fection! - ₱111</option>
+                        <option value="Corned Beef Eggs-plosion,123">Corned Beef Eggs-plosion - ₱123</option>
+                    </select>
+                    <select id="riceAddonsSelect" onchange="addToCart(this.value)">
+                        <option value="">Select Add-ons</option>
+                        <option value="Double Rice,12">Double Rice - ₱12</option>
+                        <option value="Unli Rice,24">Unli Rice - ₱24</option>
+                    </select>
+                </div>
+
+                <!-- Pasta and Snacks Section -->
+                <div class="menu-section" id="pasta-snacks">
+                    <select id="pastaSnacksSelect" onchange="addToCart(this.value)">
+                        <option value="">Select Pasta or Snack</option>
+                        <option value="Wake N' Bacon,133">Wake N' Bacon - ₱133</option>
+                        <option value="Hello Beefy Morning,155">Hello Beefy Morning - ₱155</option>
+                        <option value="Hungary for Breakfast,133">Hungary for Breakfast - ₱133</option>
+                        <option value="Mama Lobell's Spaghett-Oh! Meatballs,169">Mama Lobell's Spaghett-Oh! Meatballs - ₱169</option>
+                        <option value="Baconara,144">Baconara - ₱144</option>
+                        <option value="Chickedilla,188">Chickedilla - ₱188</option>
+                        <option value="Quesadilla,155">Quesadilla - ₱155</option>
+                        <option value="Cheesy Potato Wedges (Solo),123">Cheesy Potato Wedges (Solo) - ₱123</option>
+                        <option value="Cheesy Potato Wedges (Sharing),246">Cheesy Potato Wedges (Sharing) - ₱246</option>
+                        <option value="Grilled Cheese,99">Grilled Cheese - ₱99</option>
+                        <option value="Chika Chips,222">Chika Chips - ₱222</option>
+                    </select>
+                </div>
+
+                <!-- Beverages Section -->
+                <div class="menu-section" id="beverages">
+                    <select id="beveragesSelect" onchange="addToCart(this.value)">
+                        <option value="">Select Beverage</option>
+                        <option value="Americano,99">Americano - ₱99</option>
+                        <option value="Latte,122">Latte - ₱122</option>
+                        <option value="Spanish Latte,133">Spanish Latte - ₱133</option>
+                        <option value="Dirty Matcha Latte,133">Dirty Matcha Latte - ₱133</option>
+                        <option value="Salted Caramel Latte,133">Salted Caramel Latte - ₱133</option>
+                        <option value="White Mocha Latte,133">White Mocha Latte - ₱133</option>
+                        <option value="Caramel Macchiato,133">Caramel Macchiato - ₱133</option>
+                        <option value="French Vanilla,133">French Vanilla - ₱133</option>
+                        <option value="Matchaberi,160">Matchaberi - ₱160</option>
+                        <option value="Matcha Oreo,160">Matcha Oreo - ₱160</option>
+                        <option value="Strawberry Matcha Latte,144">Strawberry Matcha Latte - ₱144</option>
+                        <option value="Chocolate Matcha Latte,123">Chocolate Matcha Latte - ₱123</option>
+                        <option value="Caramel Frappucino,189">Caramel Frappucino - ₱189</option>
+                        <option value="Dirty Lotus Biscoff Frappe,199">Dirty Lotus Biscoff Frappe - ₱199</option>
+                        <option value="Oreo Cream Frappucino,144">Oreo Cream Frappucino - ₱144</option>
+                        <option value="Lotus Biscoff Frappucino,189">Lotus Biscoff Frappucino - ₱189</option>
+                        <option value="Matcha Frappucino,144">Matcha Frappucino - ₱144</option>
+                    </select>
+                    <select id="beverageAddonsSelect" onchange="addToCart(this.value)">
+                        <option value="">Select Add-ons</option>
+                        <option value="Almond Milk,40">Almond Milk - ₱40</option>
+                        <option value="Sugar Syrup,20">Sugar Syrup - ₱20</option>
+                        <option value="Nata,15">Nata - ₱15</option>
+                        <option value="Single Espresso Shot,40">Single Espresso Shot - ₱40</option>
+                        <option value="Oat Milk,40">Oat Milk - ₱40</option>
+                    </select>
+                    <select id="sodaSelect" onchange="addToCart(this.value)">
+                        <option value="">Select Soda Refreshment</option>
+                        <option value="Green Apple Soda,99">Green Apple - ₱99</option>
+                        <option value="Honey Peach Soda,99">Honey Peach - ₱99</option>
+                        <option value="Passion Fruit Soda,99">Passion Fruit - ₱99</option>
+                        <option value="Lychee Soda,99">Lychee - ₱99</option>
+                        <option value="Strawberry Soda,99">Strawberry - ₱99</option>
+                        <option value="Blueberry Soda,99">Blueberry - ₱99</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Shopping Cart -->
+            <div class="shopping-cart">
+                <h3>Your Order</h3>
+                <div id="cart-items"></div>
+                <div class="cart-total">
+                    <span>Total:</span>
+                    <span id="cart-total">₱0</span>
+                </div>
+                <button class="checkout-btn" onclick="checkout()">Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox">
+        <span class="close-button">&times;</span>
+        <img src="" alt="Enlarged menu item">
+    </div>
+
+    <!-- Floating Cart -->
+    <div class="floating-cart" onclick="toggleMenuTab()">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count">0</span>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <p>&copy; 2025 Hello Sage Cafe. All rights reserved.</p>
+    </footer>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        var swiper = new Swiper('.menu-swiper', {
+            loop: true,
+            slidesPerView: 4,
+            spaceBetween: 10,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            autoplay: {
+                delay: 3500,
+                disableOnInteraction: false,
+            },
+            breakpoints: {
+                1200: { slidesPerView: 4 },
+                900: { slidesPerView: 3 },
+                600: { slidesPerView: 2 },
+                0: { slidesPerView: 1 }
+            }
+        });
+
+        // Lightbox functions
+        function openLightbox(element) {
+            const lightbox = document.querySelector('.lightbox');
+            const lightboxImg = document.querySelector('.lightbox img');
+            const img = element.querySelector('img');
+            
+            lightboxImg.src = img.src;
+            lightboxImg.alt = img.alt;
+            lightbox.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.querySelector('.lightbox');
+            lightbox.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close lightbox when clicking the close button
+        document.querySelector('.close-button').addEventListener('click', function(e) {
+            e.stopPropagation();
+            closeLightbox();
+        });
+
+        // Menu Tab Functions
+        function toggleMenuTab() {
+            const tab = document.getElementById('menuTab');
+            tab.classList.toggle('active');
+        }
+
+        function showCategory(categoryId) {
+            // Hide all sections
+            document.querySelectorAll('.menu-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Show selected section
+            if (categoryId) {
+                document.getElementById(categoryId).style.display = 'block';
+            }
+        }
+
+        // Shopping Cart Functions
+        let cart = [];
+        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+        function loadUserCart() {
+            if (currentUser) {
+                const userCart = JSON.parse(localStorage.getItem(`cart_${currentUser.id}`)) || [];
+                cart = userCart;
+                updateCart();
+                updateCartCount();
+            } else {
+                cart = [];
+                updateCart();
+                updateCartCount();
+            }
+        }
+
+        function saveUserCart() {
+            if (currentUser) {
+                localStorage.setItem(`cart_${currentUser.id}`, JSON.stringify(cart));
+            }
+        }
+
+        function updateCartCount() {
+            const cartCount = document.querySelector('.cart-count');
+            cartCount.textContent = cart.length;
+        }
+
+        function addToCart(value) {
+            if (!value) return;
+            const [name, price] = value.split(',');
+            cart.push({ name, price: parseInt(price) });
+            updateCart();
+            updateCartCount();
+            saveUserCart();
+            showNotification(`${name} added to cart!`);
+            
+            // Reset the select element
+            event.target.value = '';
+        }
+
+        function updateCart() {
+            const cartItems = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+            let total = 0;
+
+            cartItems.innerHTML = '';
+            cart.forEach((item, index) => {
+                const itemElement = document.createElement('div');
+                itemElement.className = 'cart-item';
+                itemElement.innerHTML = `
+                    <span>${item.name}</span>
+                    <span>₱${item.price}</span>
+                    <button onclick="removeFromCart(${index})">×</button>
+                `;
+                cartItems.appendChild(itemElement);
+                total += item.price;
+            });
+
+            cartTotal.textContent = `₱${total}`;
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCart();
+            updateCartCount();
+            saveUserCart();
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            alert('Thank you for your order! Your total is: ' + document.getElementById('cart-total').textContent);
+            cart = [];
+            updateCart();
+            updateCartCount();
+            saveUserCart();
+        }
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'cart-notification';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.remove();
+            }, 2000);
+        }
+
+        // Add event listener for storage changes
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'currentUser') {
+                currentUser = JSON.parse(e.newValue);
+                loadUserCart();
+            }
+        });
+
+        // Load user's cart when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadUserCart();
+        });
+    </script>
+</body>
+</html> 

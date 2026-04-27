@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello Sage Cafe - Authentication</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Pacifico&family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="Images/Transparent.png">
+    <style>
+        .auth-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            border-bottom: 2px solid #ddd;
+            transition: all 0.3s ease;
+        }
+
+        .auth-tab.active {
+            border-bottom: 2px solid #4CAF50;
+            color: #4CAF50;
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .auth-button {
+            width: 100%;
+            padding: 12px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s ease;
+            font-weight: bold;
+        }
+
+        .auth-button:hover {
+            background: #45a049;
+        }
+
+        .error-message {
+            color: #ff0000;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .status-message {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 4px;
+            text-align: center;
+            display: none;
+        }
+
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .failure {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .user-profile {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f1f8ff;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .user-profile h3 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .user-info {
+            margin-bottom: 10px;
+        }
+
+        .user-info span {
+            font-weight: bold;
+        }
+
+        .logout-btn {
+            background-color: #f44336;
+            margin-top: 15px;
+        }
+
+        .logout-btn:hover {
+            background-color: #d32f2f;
+        }
+
+        .reset-accounts-btn {
+            background-color: #ff9800;
+            margin-top: 10px;
+        }
+
+        .reset-accounts-btn:hover {
+            background-color: #f57c00;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <div class="header">
+        <div class="logo-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="Images/logo.jpg" alt="Hello Sage Cafe Logo">
+                </a>
+            </div>
+            <h1>Hello Sage Cafe</h1>
+        </div>
+        <nav class="nav-buttons">
+            <a href="aboutUs.html">About Us</a>
+            <a href="menu.html">Menu</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </div>
+
+    <div class="auth-container">
+        <div class="auth-tabs">
+            <div class="auth-tab active" data-tab="login">Login</div>
+            <div class="auth-tab" data-tab="signup">Sign Up</div>
+        </div>
+
+        <form id="login-form" class="auth-form active">
+            <div class="form-group">
+                <label for="loginIdentifier">Username or Email</label>
+                <input type="text" id="loginIdentifier" required>
+                <div class="error-message" id="loginIdentifierError"></div>
+            </div>
+            <div class="form-group">
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" required>
+                <div class="error-message" id="loginPasswordError"></div>
+            </div>
+            <button type="submit" class="auth-button">Login</button>
+            <div class="status-message" id="loginStatus"></div>
+        </form>
+
+        <form id="signup-form" class="auth-form">
+            <div class="form-group">
+                <label for="signupUsername">Username</label>
+                <input type="text" id="signupUsername" required>
+                <div class="error-message" id="signupUsernameError"></div>
+            </div>
+            <div class="form-group">
+                <label for="signupEmail">Email</label>
+                <input type="email" id="signupEmail" required>
+                <div class="error-message" id="signupEmailError"></div>
+            </div>
+            <div class="form-group">
+                <label for="signupPassword">Password</label>
+                <input type="password" id="signupPassword" required>
+                <div class="error-message" id="signupPasswordError"></div>
+            </div>
+            <div class="form-group">
+                <label for="signupConfirmPassword">Confirm Password</label>
+                <input type="password" id="signupConfirmPassword" required>
+                <div class="error-message" id="signupConfirmPasswordError"></div>
+            </div>
+            <button type="submit" class="auth-button">Sign Up</button>
+            <div class="status-message" id="signupStatus"></div>
+        </form>
+
+        <div class="user-profile" id="userProfile">
+            <h3>Welcome Back!</h3>
+            <div class="user-info">Username: <span id="profileUsername"></span></div>
+            <div class="user-info">Email: <span id="profileEmail"></span></div>
+            <div class="user-info">Account Created: <span id="profileCreated"></span></div>
+            <button class="auth-button logout-btn" id="logoutButton">Logout</button>
+            <button class="auth-button reset-accounts-btn" id="resetAccountsButton">Reset All Accounts</button>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <p>&copy; 2025 Hello Sage Cafe. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Store user accounts
+        let users = JSON.parse(localStorage.getItem('users')) || [];
+        
+        // Tab switching functionality
+        const tabs = document.querySelectorAll('.auth-tab');
+        const forms = document.querySelectorAll('.auth-form');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and forms
+                tabs.forEach(t => t.classList.remove('active'));
+                forms.forEach(f => {
+                    f.classList.remove('active');
+                    f.style.display = 'none';
+                });
+                
+                // Add active class to clicked tab and corresponding form
+                tab.classList.add('active');
+                const form = document.getElementById(`${tab.dataset.tab}-form`);
+                form.classList.add('active');
+                form.style.display = 'block';
+            });
+        });
+
+        // Helper functions
+        function showError(elementId, message) {
+            const element = document.getElementById(elementId);
+            element.textContent = message;
+            element.style.display = 'block';
+        }
+
+        function clearErrors() {
+            document.querySelectorAll('.error-message').forEach(error => {
+                error.textContent = '';
+                error.style.display = 'none';
+            });
+        }
+
+        function showStatus(elementId, message, isSuccess) {
+            const element = document.getElementById(elementId);
+            element.textContent = message;
+            element.className = `status-message ${isSuccess ? 'success' : 'failure'}`;
+            element.style.display = 'block';
+        }
+
+        function validateEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        function checkLoginStatus() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if (currentUser) {
+                showUserProfile(currentUser);
+            }
+        }
+
+        function showUserProfile(user) {
+            // Hide auth forms and tabs
+            document.querySelectorAll('.auth-form').forEach(form => {
+                form.classList.remove('active');
+                form.style.display = 'none';
+            });
+            document.querySelectorAll('.auth-tab').forEach(tab => {
+                tab.classList.remove('active');
+                tab.style.display = 'none';
+            });
+            
+            // Show user profile
+            document.getElementById('userProfile').style.display = 'block';
+            document.getElementById('profileUsername').textContent = user.username;
+            document.getElementById('profileEmail').textContent = user.email;
+            
+            // Fix date formatting
+            const createdDate = user.created ? new Date(user.created) : new Date();
+            document.getElementById('profileCreated').textContent = createdDate.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        // Login form handling
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            clearErrors();
+            
+            const identifier = document.getElementById('loginIdentifier').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            
+            let isValid = true;
+            
+            if (identifier === '') {
+                showError('loginIdentifierError', 'Please enter your username or email');
+                isValid = false;
+            }
+            
+            if (password === '') {
+                showError('loginPasswordError', 'Please enter your password');
+                isValid = false;
+            }
+            
+            if (isValid) {
+                const user = users.find(u => 
+                    (u.username === identifier || u.email === identifier) && 
+                    u.password === password
+                );
+                
+                if (user) {
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    showUserProfile(user);
+                    showStatus('loginStatus', 'Login successful!', true);
+                } else {
+                    showStatus('loginStatus', 'Invalid username/email or password', false);
+                }
+            }
+        });
+
+        // Signup form handling
+        document.getElementById('signup-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            clearErrors();
+            
+            const username = document.getElementById('signupUsername').value.trim();
+            const email = document.getElementById('signupEmail').value.trim();
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('signupConfirmPassword').value;
+            
+            let isValid = true;
+            
+            // Username validation
+            if (username.length < 3) {
+                showError('signupUsernameError', 'Username must be at least 3 characters');
+                isValid = false;
+            }
+            
+            // Check if username already exists
+            if (users.some(user => user.username === username)) {
+                showError('signupUsernameError', 'Username already exists');
+                isValid = false;
+            }
+            
+            // Email validation
+            if (!validateEmail(email)) {
+                showError('signupEmailError', 'Please enter a valid email address');
+                isValid = false;
+            }
+            
+            // Check if email already exists
+            if (users.some(user => user.email === email)) {
+                showError('signupEmailError', 'Email already exists');
+                isValid = false;
+            }
+            
+            // Password validation
+            if (password.length < 6) {
+                showError('signupPasswordError', 'Password must be at least 6 characters');
+                isValid = false;
+            }
+            
+            // Confirm password validation
+            if (password !== confirmPassword) {
+                showError('signupConfirmPasswordError', 'Passwords do not match');
+                isValid = false;
+            }
+            
+            // If valid, register the user
+            if (isValid) {
+                const newUser = {
+                    id: Date.now(),
+                    username,
+                    email,
+                    password,
+                    created: new Date().toLocaleString()
+                };
+                
+                users.push(newUser);
+                localStorage.setItem('users', JSON.stringify(users));
+                
+                showStatus('signupStatus', 'Registration successful! Please login.', true);
+                document.querySelector('[data-tab="login"]').click();
+                document.getElementById('signup-form').reset();
+                
+                // Log to console (for demonstration only)
+                console.log('New user registered:', newUser);
+                console.log('All users:', users);
+            }
+        });
+
+        // Logout handling
+        document.getElementById('logoutButton').addEventListener('click', function() {
+            localStorage.removeItem('currentUser');
+            document.getElementById('userProfile').style.display = 'none';
+            
+            // Show auth tabs and forms again
+            document.querySelectorAll('.auth-tab').forEach(tab => {
+                tab.style.display = 'flex';
+            });
+            document.querySelectorAll('.auth-form').forEach(form => {
+                form.style.display = 'none';
+            });
+            
+            // Activate login tab and form
+            document.querySelector('[data-tab="login"]').classList.add('active');
+            document.getElementById('login-form').classList.add('active');
+            document.getElementById('login-form').style.display = 'block';
+            
+            // Reset forms
+            document.getElementById('login-form').reset();
+            document.getElementById('signup-form').reset();
+            
+            // Clear any status messages
+            document.getElementById('loginStatus').style.display = 'none';
+            document.getElementById('signupStatus').style.display = 'none';
+            
+            // Clear any error messages
+            clearErrors();
+        });
+
+        // Reset all accounts
+        document.getElementById('resetAccountsButton').addEventListener('click', function() {
+            if (confirm('Are you sure you want to reset all accounts? This action cannot be undone.')) {
+                // Clear all stored data
+                localStorage.removeItem('users');
+                localStorage.removeItem('currentUser');
+                
+                // Reset the users array
+                users = [];
+                
+                // Show success message
+                showStatus('loginStatus', 'All accounts have been reset successfully.', true);
+                
+                // Reset the UI
+                document.getElementById('userProfile').style.display = 'none';
+                document.querySelectorAll('.auth-tab').forEach(tab => {
+                    tab.style.display = 'flex';
+                });
+                document.querySelectorAll('.auth-form').forEach(form => {
+                    form.style.display = 'none';
+                });
+                
+                // Activate login tab and form
+                document.querySelector('[data-tab="login"]').classList.add('active');
+                document.getElementById('login-form').classList.add('active');
+                document.getElementById('login-form').style.display = 'block';
+                
+                // Reset forms
+                document.getElementById('login-form').reset();
+                document.getElementById('signup-form').reset();
+                
+                // Clear any error messages
+                clearErrors();
+            }
+        });
+
+        // Check login status on page load
+        document.addEventListener('DOMContentLoaded', checkLoginStatus);
+    </script>
+</body>
+</html> 
